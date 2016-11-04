@@ -31,7 +31,7 @@
     		-moz-background-size: cover;
     		-o-background-size: cover;
     		background-size: cover;
-    		
+
     	}
 
     	body{
@@ -40,11 +40,24 @@
 
     	}
 
+    	input{
+
+    		margin: 20px 0px;
+
+    	}
+
     	.container{
 
     		text-align: center;
     		margin-top: 200px;
     		width: 450px;
+    		color: black;
+
+    	}
+
+    	#cityLabel{
+
+    		color: white;
 
     	}
 
@@ -56,6 +69,13 @@
   	<div class="container">
 
 		<h1>What's The Weather?</h1>
+		<form>
+			 <div class="form-group">
+			    <label for="city" id="cityLabel">Enter the name of the city</label>
+			    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. London, Tokyo">
+			 </div>
+		   	<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+		</form>
 
 	</div>	
     	
