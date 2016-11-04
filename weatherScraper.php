@@ -4,7 +4,7 @@
 	$weather = '';
 	$error = '';
 
-	if($_GET['city']){
+	if(array_key_exists('city', $_GET)){
 
 		if(strpos($_GET['city'], ' ') > 0) {
 
@@ -130,24 +130,35 @@
 		<form>
 			 <div class="form-group">
 			    <label for="city" id="cityLabel">Enter the name of the city</label>
-			    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. London, Tokyo" value="<?php echo $_GET['city'] ?>">
+			    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. London, Tokyo" value="<?php 
+			    
+			    if (array_key_exists('city', $_GET)) {
+			    	
+			    	echo $_GET['city'];
+
+			    }
+			     
+
+			    ?>">
 			 </div>
 		   	<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 		</form>
 
+		<div id="weather">
 		<?php
 
-			if ($error) {
+			if ($weather) {
 
-				echo '<div class="alert alert-danger" role="alert" id="weather">'.$error.'</div>';
+				echo '<div class="alert alert-info" role="alert">'.$weather.'</div>';
 
-			}else {
+			}else if ($error) {
 
-				echo '<div class="alert alert-info" role="alert" id="weather">'.$weather.'</div>';
+				echo '<div class="alert alert-danger" role="alert">'.$error.'</div>';
 
 			}
 
 		?>
+		</div>
 
 	</div>	
     	
