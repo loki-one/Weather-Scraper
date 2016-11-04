@@ -1,6 +1,18 @@
 <?php
 
+	
+	if($_GET['city']){
 
+		$forecastPage = file_get_contents("http://www.weather-forecast.com/locations/".$_GET['city']."/forecasts/latest");
+
+		$pageArray = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">', $forecastPage);
+
+		$secondPageArray = explode('</span></span></span>', $pageArray[1]);
+
+		$weather = $secondPageArray[0];
+
+
+	}
 
 
 
@@ -49,7 +61,7 @@
     	.container{
 
     		text-align: center;
-    		margin-top: 200px;
+    		margin-top: 100px;
     		width: 450px;
     		color: black;
 
@@ -60,6 +72,13 @@
     		color: white;
 
     	}
+
+    	#weather{
+
+    		margin-top: 15px;
+
+    	}
+
 
 
     </style>
@@ -76,6 +95,11 @@
 			 </div>
 		   	<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 		</form>
+
+		<?php
+
+			echo '<div class="alert alert-info" role="alert" id="weather">'.$weather.'</div>'			
+		?>
 
 	</div>	
     	
