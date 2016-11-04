@@ -147,6 +147,7 @@
 		<div id="weather">
 		<?php
 
+			#displays weather or error
 			if ($weather) {
 
 				echo '<div class="alert alert-info" role="alert">'.$weather.'</div>';
