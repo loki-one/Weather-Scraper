@@ -1,6 +1,8 @@
 <?php
 
 	$checkCity = '';
+	$weather = '';
+	$error = '';
 
 	if($_GET['city']){
 
@@ -13,6 +15,15 @@
 			$checkCity = $_GET['city'];
 		}
 
+		$file_headers = @get_headers("http://www.weather-forecast.com/locations/".$checkCity."/forecasts/latest");
+
+		if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+
+    			$error = "The entered city is not valid";
+
+		}else {
+
+
 		$forecastPage = file_get_contents("http://www.weather-forecast.com/locations/".$checkCity."/forecasts/latest");
 
 		$pageArray = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">', $forecastPage);
@@ -21,6 +32,7 @@
 
 		$weather = $secondPageArray[0];
 
+		}
 
 	}
 
@@ -101,14 +113,23 @@
 		<form>
 			 <div class="form-group">
 			    <label for="city" id="cityLabel">Enter the name of the city</label>
-			    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. London, Tokyo">
+			    <input type="text" class="form-control" id="city" name="city" placeholder="Eg. London, Tokyo" value="<?php echo $_GET['city'] ?>">
 			 </div>
 		   	<button type="submit" name="submit" class="btn btn-primary">Submit</button>
 		</form>
 
 		<?php
 
-			echo '<div class="alert alert-info" role="alert" id="weather">'.$weather.'</div>'			
+			if ($error) {
+
+				echo '<div class="alert alert-danger" role="alert" id="weather">'.$error.'</div>';
+
+			}else {
+
+				echo '<div class="alert alert-info" role="alert" id="weather">'.$weather.'</div>';
+
+			}
+
 		?>
 
 	</div>	
