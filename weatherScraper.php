@@ -1,9 +1,19 @@
 <?php
 
-	
+	$checkCity = '';
+
 	if($_GET['city']){
 
-		$forecastPage = file_get_contents("http://www.weather-forecast.com/locations/".$_GET['city']."/forecasts/latest");
+		if(strpos($_GET['city'], ' ') > 0) {
+
+			$checkCity = str_replace(' ', '', $_GET['city']);
+
+		}else{
+
+			$checkCity = $_GET['city'];
+		}
+
+		$forecastPage = file_get_contents("http://www.weather-forecast.com/locations/".$checkCity."/forecasts/latest");
 
 		$pageArray = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">', $forecastPage);
 
