@@ -28,9 +28,26 @@
 
 		$pageArray = explode('3 Day Weather Forecast Summary:</b><span class="read-more-small"><span class="read-more-content"> <span class="phrase">', $forecastPage);
 
-		$secondPageArray = explode('</span></span></span>', $pageArray[1]);
+		if(sizeof($pageArray) > 1) {
 
-		$weather = $secondPageArray[0];
+			$secondPageArray = explode('</span></span></span>', $pageArray[1]);
+
+			if (sizeof($secondPageArray) > 1) {
+			
+				$weather = $secondPageArray[0];
+
+			}else{
+
+				$error = "The entered city is not valid"; 
+
+			}
+
+		}else {
+
+			$error = "The entered city is not valid";			
+
+		}
+
 
 		}
 
